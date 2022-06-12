@@ -1,0 +1,587 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+/*
+İsim: Ceylin
+Soyisim: Çaltepe
+*/
+
+////////////3. Hafta////////////
+
+/*Struct*/
+/*
+struct hasta{
+	int tc;
+	char ad[20];
+	char soyad[20];
+};
+
+main(){
+	struct hasta hasta1;
+	hasta1.tc=1234567890;
+	strcpy(hasta1.ad,"Ceylin");
+	strcpy(hasta1.soyad,"Caltepe");
+	printf("Hasta Adi :\t%s\n",hasta1.ad);
+	printf("Hasta Soyadi :\t%s\n",hasta1.soyad);
+	printf("Hasta TC'si :\t%d\n",hasta1.tc);
+}
+*/
+
+/*Geriye Struct döndüren fonksiyonlar*/
+/*
+struct Hasta{
+	int tc;
+	char ad[20];
+	char soyad[20];
+};
+
+struct Hasta HastaEkleme(){
+	struct Hasta hasta;
+	printf("Hasta Adini Giriniz : ");
+	scanf("%s",&hasta.ad);
+	printf("Hasta Soyadini Giriniz : ");
+	scanf("%s",&hasta.soyad);
+	printf("Hasta TC Giriniz : ");
+	scanf("%d",&hasta.tc);
+	
+	return hasta;
+}
+
+void HastaGosterme(struct Hasta hasta){
+	printf("Hasta Adi : %s\n",hasta.ad);
+	printf("Hasta Soyadi : %s\n",hasta.soyad);
+	printf("Hasta TC : %d\n",hasta.tc);
+}
+
+int main(){
+	struct Hasta hasta = HastaEkleme();
+	HastaGosterme(hasta);
+}*/
+
+//Diziler ve Struct
+/*
+struct Hasta{
+	int tc;
+	char ad[20];
+	char soyad[20];
+};
+
+struct Hasta HastaEkleme(){
+	struct Hasta hasta;
+	printf("Hasta Adini Giriniz : ");
+	scanf("%s",&hasta.ad);
+	printf("Hasta Soyadini Giriniz : ");
+	scanf("%s",&hasta.soyad);
+	printf("Hasta TC Giriniz : ");
+	scanf("%d",&hasta.tc);
+	
+	return hasta;
+}
+
+void HastaGosterme(struct Hasta hasta){
+	printf("Hasta Adi : %s\n",hasta.ad);
+	printf("Hasta Soyadi : %s\n",hasta.soyad);
+	printf("Hasta TC : %d\n",hasta.tc);
+}
+
+int main(){
+	int n;
+	printf("Kayit yapilacak hasta sayisini giriniz: ");
+	scanf("%d",&n);
+	printf("\n");
+	struct Hasta hasta[n];
+
+	for (int i=0; i<n; i++){
+		printf("%d. Hastayi Giriniz: \n",i+1);
+		hasta[i] = HastaEkleme();
+		printf("\n");
+	}
+	
+	for (int i=0; i<n; i++){
+		printf("%d. Hasta: \n",i+1);
+		HastaGosterme(hasta[i]);
+		printf("\n");
+	}
+}
+*/
+
+/*Struct içinde Struct kullanımı*/
+/*
+enum Polikinlik{
+	Ortopedi,KBB,Goz
+	}polikinlik;
+
+struct Kisi{
+	char ad[20];
+	char soyad[20];
+};
+
+struct Doktor{
+	struct Kisi kisi;
+};
+
+struct Hasta{
+	int tc;
+	struct Kisi kisi;
+	struct Doktor doktor;
+};
+
+struct Doktor DoktorSorgulama(struct Doktor doktorListesi[]){
+	printf("0 -> Ortopedi\n1 -> Goz\n2 -> KBB\nPolikinlik Seciniz : ");
+	scanf("%d",&polikinlik);
+	switch(polikinlik){
+		case Ortopedi:
+			return doktorListesi[0];
+		case Goz:
+			return doktorListesi[1];
+		case KBB:
+			return doktorListesi[2];
+		default:
+			printf("Gecersiz Islem!");
+			break;
+	}
+}
+
+struct Hasta HastaEkleme(struct Doktor doktorListesi[]){
+	struct Hasta hasta;
+	printf("Hasta Adini Giriniz : ");
+	scanf("%s",&hasta.kisi.ad);
+	printf("Hasta Soyadini Giriniz : ");
+	scanf("%s",&hasta.kisi.soyad);
+	printf("Hasta TC Giriniz : ");
+	scanf("%d",&hasta.tc);
+	hasta.doktor = DoktorSorgulama(doktorListesi);
+	
+	return hasta;
+}
+
+void HastaGosterme(struct Hasta hasta){
+	printf("Hasta Adi : %s %s\n",hasta.kisi.ad, hasta.kisi.soyad);
+	printf("Hasta TC : %d\n",hasta.tc);
+	printf("Hasta'nin Gidecegi Doktor : %s %s\n",hasta.doktor.kisi.ad, hasta.doktor.kisi.soyad);
+}
+
+int main(){
+	struct Doktor doktor1,doktor2,doktor3;
+	
+	strcpy(doktor1.kisi.ad,"Ahmet");
+	strcpy(doktor2.kisi.ad,"Mehmet");
+	strcpy(doktor3.kisi.ad,"Ayse");
+	
+	strcpy(doktor1.kisi.soyad,"Aslan");
+	strcpy(doktor2.kisi.soyad,"Coban");
+	strcpy(doktor3.kisi.soyad,"Odevli");
+	
+	struct Doktor doktorListesi[3] = {doktor1,doktor2,doktor3};
+	
+	struct Hasta hasta = HastaEkleme(doktorListesi);
+	
+	HastaGosterme(hasta);
+}*/
+
+////////////4. Hafta////////////
+/*Struct Değişkenlerini Kopyalama*/
+/*
+struct Kitap{
+	char kitapAdi[20];
+	char yazarAdi[20];
+	char yayinEvi[20];
+	int sayfaSayisi;
+}kitap1, kitap2;
+
+struct Kitap BilgileriDoldur(struct Kitap kitap){
+	puts("Lutfen Kitap Adi Giriniz: ");
+	gets(kitap.kitapAdi);
+	puts("Lutfen Yazar Adi Giriniz: ");
+	gets(kitap.yazarAdi);
+	puts("Lutfen Yayin Evi Adi Giriniz: ");
+	gets(kitap.yayinEvi);
+	puts("Lutfen Sayfa Sayisi Giriniz: ");
+	scanf("%d",&kitap.sayfaSayisi);
+	
+	return kitap;
+};
+
+void BilgileriYazdir(struct Kitap kitap){
+	printf("Kitap Adi: %s\n",kitap.kitapAdi);
+	printf("Yazar Adi: %s\n",kitap.yazarAdi);
+	printf("Yayin Evi Adi: %s\n",kitap.yayinEvi);
+	printf("Sayfa Sayisi: %d\n",kitap.sayfaSayisi);
+};
+
+int main(){
+
+	kitap1 = BilgileriDoldur(kitap1);
+	
+	kitap2=kitap1;
+	
+	puts("1. Kitap:");
+	BilgileriYazdir(kitap1);
+	puts("-------------");
+	puts("2. Kitap:");
+	BilgileriYazdir(kitap2);
+
+}
+*/
+
+/*Struct Değişkenlerini Karşılaştırma*/
+/*
+struct Kitap{
+	char kitapAdi[20];
+	char yazarAdi[20];
+	char yayinEvi[20];
+	int sayfaSayisi;
+}kitap1, kitap2;
+
+struct Kitap BilgileriDoldur(struct Kitap kitap){
+	puts("Lutfen Kitap Adi Giriniz: ");
+	gets(kitap.kitapAdi);
+	puts("Lutfen Yazar Adi Giriniz: ");
+	gets(kitap.yazarAdi);
+	puts("Lutfen Yayin Evi Adi Giriniz: ");
+	gets(kitap.yayinEvi);
+	puts("Lutfen Sayfa Sayisi Giriniz: ");
+	scanf("%d",&kitap.sayfaSayisi);
+	
+	return kitap;
+};
+
+int main(){
+	kitap1 = BilgileriDoldur(kitap1);
+	fflush(stdin);
+	kitap2 = BilgileriDoldur(kitap2);
+	
+	if((kitap1.kitapAdi == kitap2.kitapAdi)&&(kitap1.yazarAdi == kitap2.yazarAdi)&&(kitap1.yayinEvi == kitap2.yayinEvi)&&(kitap1.sayfaSayisi == kitap2.sayfaSayisi)){
+		puts("Girilen kitaplar aynidir...");
+	}
+	else{
+		puts("Girilen kitaplar farklidir...");
+	}
+}
+*/
+
+//Union-Birlikler
+/*
+union HesapGirisi{
+	char userName[20];
+	int pin;
+}giris;
+struct KayitliHesap{
+	char userName[20];
+	int pin;
+}kayitli;
+
+int main(){
+	kayitli.pin = 1234;
+	strcpy(kayitli.userName,"KullaniciAdi");
+	
+	while(1){
+		fflush(stdin);
+		puts("Username: ");
+		gets(giris.userName);
+	
+	if(strcmp(kayitli.userName,giris.userName)==0){
+		puts("PIN: ");
+		scanf("%d",&giris.pin);
+	
+		if(giris.pin == kayitli.pin){
+			puts("Basariyla Giris Yaptiniz...");
+			break;
+		}
+		else{
+			puts("Hatali Sifre");
+		}
+	}
+	else{
+		puts("Boyle Bir Kullanici Bulunamadi...");
+	}
+}
+	printf("HesapGirisi'nin kapladigi alan: %d byte\n",sizeof(giris));
+	printf("KayitliHesap'in kapladigi alan: %d byte",sizeof(kayitli));
+}*/
+
+//Pointer
+/*
+int main(){
+	int sayi=10;
+	int *ptr = &sayi;
+	
+	printf("sayi degiskeninin adresi: %p",&sayi);
+	printf("\nptr pointer'inin adresi: %p",&ptr);
+	
+	printf("\n\nsayi degiskeninin degeri: %d",sayi);
+	printf("\nptr pointer'inin tuttugu adres: %p",ptr);
+	printf("\nptr pointer'inin adresini tuttugu degiskenin degeri: %d",*ptr);
+	
+	printf("\n\nsayi degiskeni icin yeni deger giriniz: ");
+	scanf("%d",&sayi);
+	
+	printf("\nsayi degiskeninin adresi: %p",&sayi);
+	printf("\nptr pointer'inin adresi: %p",&ptr);
+	
+	printf("\n\nsayi degiskeninin degeri: %d",sayi);
+	printf("\nptr pointer'inin tuttugu adres: %p",ptr);
+	printf("\nptr pointer'inin adresini tuttugu degiskenin degeri: %d",*ptr);
+}
+*/
+
+
+////////////5. Hafta////////////
+//5. Sununun Son Sorusu
+/*
+int* KucukSayiBul(int a[], int boyut){
+    int *temp;
+    temp = &a[0];
+    for (int i = 1; i < boyut; i++){
+		if ((*(a+i)) < *temp){
+            temp = (a + i);
+		}
+	}
+	return temp;
+}
+
+int main(){
+	int a[] = {4,7,-3,-5, 9};
+	printf("kucuk sayi degeri : %d , kucuk sayi adresi : %p",*KucukSayiBul(a,5), KucukSayiBul(a,5));
+}
+*/
+
+//Kullanıcının Doldurduğu Bir Dizinin Elemanlarından En Büyük Olanını Bulma
+/*
+int* BuyukSayiBul(int* ptr){
+    int *temp;
+    temp = ptr;
+    for (int i = 1; i < 5; i++){
+		if ((*(ptr+i)) > *temp){
+            temp = (ptr + i);
+		}
+	}
+	return temp;
+}
+
+int* DiziDoldur(int a[]){
+	int *temp;
+	temp = &a[0];
+	for (int i = 0; i < 5; i++){
+		printf("%d. index'li sayiyi giriniz: ",i);
+		scanf("%d",(temp+i));
+	}
+	return temp;
+}
+
+int main(){
+	int a[5], *ptr;
+	ptr = DiziDoldur(a);
+	printf("buyuk sayi degeri : %d , buyuk sayi adresi : %p",*BuyukSayiBul(ptr), BuyukSayiBul(ptr));
+}
+*/
+
+//Pointer Zinciri
+/*
+int main(){
+	int **p2p, *p, val;
+	val = 5;
+	p = &val;
+	p2p = &p;
+	
+	printf("Adresler:\n");
+	printf("&val: %p\n",&val);
+	printf("&p: %p\n",&p);
+	printf("&p2p: %p\n\n",&p2p);
+	
+	printf("Tuttuklari Degerler:\n");
+	printf("val: %d\n",val);
+	printf("p: %p (val degiskeninin adresi)\n",p);
+	printf("p2p: %p (p pointer'inin adresi)\n\n",p2p);
+	
+	printf("Tuttuklari Degiskenin Degerleri:\n");
+	printf("*p: %d (val degiskeninin degeri)\n",*p);
+	printf("*p2p: %p (p pointer'inin tuttugu adres)\n\n",*p2p);
+	
+	printf("Tuttuklari Degiskenin Degerlerinin Degeri:\n");
+	printf("**p2p: %d (val degiskeninin degeri)\n",**p2p);
+}*/
+
+//Kullanıcıdan Büyük Harflerle Alınan Bir Kelimeyi Fonksiyon Kullanmadan Küçük Harfler İle Yazma 
+/*
+int main(){
+	char str[50], *ptr;
+	ptr = &str[0];
+	printf("Buyuk Harflerle bir kelime giriniz: ");
+	scanf("%s",str);
+	
+	while(*ptr != NULL){
+		printf("%c",*(ptr++)+32);
+	}
+}
+*/
+
+
+////////////6. Hafta////////////
+
+//Fonksiyon Pointer'ı
+/*
+int Toplama(int a, int b){
+	return a + b;
+}
+
+int Cikarma(int a, int b){
+	return a - b;
+}
+
+int Carpma(int a, int b){
+	return a * b;
+}
+
+int Bolme(int a, int b){
+	return a / b;
+}
+int main(){
+		int s1,s2;
+		int (*fonkPtr[4])(int,int); //Fonksiyon işaretçisi
+		fonkPtr[0] = &Toplama;
+		fonkPtr[1] = &Cikarma;
+		fonkPtr[2] = &Carpma;
+		fonkPtr[3] = &Bolme;
+
+		printf("Lutfen 2 sayi giriniz: ");
+		printf("1. Sayi: ");
+		scanf("%d",&s1);
+		printf("2. Sayi: ");
+		scanf("%d",&s2);
+		
+		printf("%d ve %d'nin\nToplami : %d\nFarki : %d\nCarpimi : %d\nBolumu : %d",
+		s1,s2,
+		(*fonkPtr[0])(s1,s2),
+		(*fonkPtr[1])(s1,s2),
+		(*fonkPtr[2])(s1,s2),
+		(*fonkPtr[3])(s1,s2));
+	}
+*/
+
+// 3x4'luk matris'i kucukten buyuge sıralama
+/*
+int main(){
+	int i, j, k, temp, *sutun[3], matris[3][4];
+	
+	srand(time(NULL));
+	
+	for(i=0; i<3; i++){
+		for(j=0; j<4; j++){
+			matris[i][j] = rand()%20;
+		}
+		sutun[i] = matris[i];
+	}
+	printf("rastgele olusturulan matris:\n");
+	for(i=0; i<3; i++){
+		for(j=0; j<4; j++){
+			printf("%d\t",matris[i][j]);
+		}
+		printf("\n");
+	}
+	
+	for(i=0; i<3; i++){
+		for(j=0; j<4; j++){
+			for(k=j+1; k<4; k++){
+				if(*(sutun[i]+j)>*(sutun[i]+k)){
+					temp = *(sutun[i]+k);
+					*(sutun[i]+k) = *(sutun[i]+j);
+					*(sutun[i]+j) = temp;
+				}
+			}	
+		}
+	}
+	printf("\nbuçukten buyuge dogru siralanmis satirli matris:\n");
+	for(i=0; i<3; i++){
+		for(j=0; j<4; j++){
+			printf("%d\t",matris[i][j]);
+		}
+		printf("\n");
+	}
+}*/
+
+//Geri Dönüş Değeri Pointer Olan Fonksiyon
+/*
+typedef enum{
+	toplama,cikarma,carpma,bolme
+}Islem;
+
+void *HesapMakinesi(int sayilar[],int sonucDizi[]){
+	int *sonuc;
+	sonuc = sonucDizi;
+
+	*(sonuc) = sayilar[0] + sayilar[1];
+	*(sonuc + 1) = sayilar[0] - sayilar[1];
+	*(sonuc + 2) = sayilar[0] * sayilar[1];
+	*(sonuc + 3) = sayilar[0] / sayilar[1];
+}
+
+int main(){
+	int sayilar[2], sonuc[4];
+	Islem islem;
+	
+	puts("Lutfen 1. Sayiyi Giriniz");
+	scanf("%d",&sayilar[0]);
+	
+	puts("Lutfen 1. Sayiyi Giriniz");
+	scanf("%d",&sayilar[1]);
+	
+	puts("Lutfen yapmak istediginiz islemi giriniz\nToplama->0\nCikarma->1\nCarpma->2\nBolme->3");
+	scanf("%d",&islem);
+	
+	HesapMakinesi(sayilar,sonuc);
+	
+	switch(islem){
+		case toplama:
+			printf("Toplamlari: %d",sonuc[0]);
+			break;
+		case cikarma:
+			printf("Farklari: %d",sonuc[1]);
+			break;
+		case carpma:
+			printf("Carpimlari: %d",sonuc[2]);
+			break;
+		case bolme:
+			printf("Bölümleri: %d",sonuc[3]);
+			break;
+		default:
+			printf("geceriz islem...");
+			break;
+	}
+}*/
+
+//Struct'lar ve Pointer
+/*
+typedef struct{
+	char ad[50];
+	int barkod;
+	float fiyat;
+}Urun;
+
+int main(){
+	Urun *urunPtr[2], urun1, urun2;
+	int barkod;
+	
+	urunPtr[0] = &urun1;
+	urunPtr[1] = &urun2;
+	
+	strcpy(urunPtr[0]->ad,"MarkaA Yogurt");
+	urunPtr[0]->barkod = 123456789;
+	urunPtr[0]->fiyat = 14.5;
+	
+	strcpy(urunPtr[1]->ad,"MarkaB Yogurt");
+	urunPtr[1]->barkod = 987654321;
+	urunPtr[1]->fiyat = 35.0;
+	
+	printf("Lutfen barkod Giriniz:\n%s : %d\n%s : %d\n",urunPtr[0]->ad,urunPtr[0]->barkod,urunPtr[1]->ad,urunPtr[1]->barkod);
+	scanf("%d",&barkod);
+	
+	if(barkod == urunPtr[0]->barkod)
+		printf("Urun Bilgileri:\n\tAd : %s\n\tFiyat : %.2f",urunPtr[0]->ad,urunPtr[0]->fiyat);
+	else if(barkod == urunPtr[1]->barkod)
+		printf("Urun Bilgileri:\n\tAd : %s\n\tFiyat : %.2f",urunPtr[1]->ad,urunPtr[1]->fiyat);
+	else
+		printf("Gecersiz Barkod!...");
+	
+}*/

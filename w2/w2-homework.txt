@@ -1,0 +1,143 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+/*
+Hazırlayan: Ceylin Çaltepe
+Teslim Tarihi: 22.02.2022
+*/
+
+//Özyinemeli Fonksiyon Soruları
+
+/*
+1.Örnek:
+Kullanıcıdan aldığımız sayının rakamlarını toplamını toplam değişkenine atayan bir fonksiyon olsun.
+Eğer toplam değişkeni sadece bir basamaktan oluşmuyorsa bir basamaklı oluncaya kadar rakamları toplayıp toplam değişkenine atansın.
+Sadece bir basamaktan oluşan toplam sayısını Konsola bastırınız
+	ÖR: Kullanıcı 789 sayısını girmiş olsun.
+		7+8+9=24=toplam		2 basamaklı
+		2+4=6=toplam		1 basamaklı
+*/
+/*
+int BasamakToplami(int sayi, int toplam){
+	toplam += sayi % 10;
+	sayi /= 10;
+
+	if(sayi>0){
+		return BasamakToplami(sayi,toplam);
+	}
+	
+	if(toplam <10){
+		return toplam;
+	}
+	
+	sayi=toplam;
+	toplam=0;
+	
+	return BasamakToplami(sayi,toplam);
+}
+
+int main(){
+	int sayi, toplam = 0;
+	puts("Lutfen bir sayi giriniz:	");
+	scanf("%d",&sayi);
+	printf("Sonuc:	%d",BasamakToplami(sayi,toplam));
+}*/
+
+/*
+2.Örnek:
+Kullanıcıdan alınan 2 sayının ebob'unu hesaplayıp konsola yazdırınız.
+*/
+/*
+int Ebob(int sayi1, int sayi2){
+	if(sayi2 == 0){
+		return sayi1;
+	}
+	return Ebob(sayi2, sayi1 % sayi2);
+}
+
+int main(){
+	int sayi1, sayi2;
+	puts("Lutfen bir sayi giriniz:	");
+	scanf("%d %d",&sayi1,&sayi2);
+	printf("Sonuc:	%d",Ebob(sayi1,sayi2));
+}
+*/
+
+//Enum Soruları
+
+/*
+3.Örnek:
+Kullanıcıdan alınan sayı tek ise ekrana TEK, çift ise CIFT değerini konsola yazdıracak.
+(!)37. slaytın sorusu
+*/
+/*
+typedef enum{//Tek-Çift
+	TEK,CIFT
+}eTekCift;
+
+eTekCift TekCift(int sayi){
+	if(sayi % 2==0){
+		return CIFT;
+	}
+	return TEK;
+}
+
+int main(){
+	int sayi;
+	
+	puts("Lutfen bir sayi giriniz:	");
+	scanf("%d",&sayi);
+	
+	switch(TekCift(sayi)){
+		case CIFT:
+			printf("%d cifttir...",sayi);
+			break;
+		case TEK:
+			printf("%d tektir...",sayi);
+			break;
+		default:
+			printf("Hata");
+			break;
+	}
+}
+*/
+
+/*
+4. Örnek:
+	Kullanıcıdan alınan yolcu türüne göre kesilen otobüs ücretini ekrana yazdırınız.
+*/
+/*
+typedef enum{//öğrenci,+65,görevli,Normal
+	KARTSIZ=1,
+	KARTLI,
+	YASLI,
+	OGRENCI,
+	GOREVLI
+}eYolcuTurleri;
+
+int main(){
+	eYolcuTurleri yolcu;
+	puts("Otobusumuze Hosgeldiniz! Eger: \nKartiniz Yoksa 1\nKartiniz Varsa 2\n65 Yas Ve Ustuyseniz 3\nOgrenciyseniz 4\nGorevliyseniz 5\nTuslayiniz. Iyi Yolculuklar!");
+	scanf("%d",&yolcu);
+	
+	switch(yolcu){
+		case KARTSIZ:
+			puts("6.00TL odendi...");
+			break;
+		case KARTLI:
+			puts("4,50TL odendi...");
+			break;
+		case YASLI:
+			puts("0TL odendi...");
+			break;
+		case OGRENCI:
+			puts("2.75TL odendi...");
+			break;
+		case GOREVLI:
+			puts("0TL odendi...");
+			break;
+		default:
+			break;
+	}
+}
+*/
